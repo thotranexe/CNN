@@ -23,7 +23,7 @@ path="./lfw"
 result = [y for x in os.walk(path) for y in glob(os.path.join(x[0], '*.jpg'))]
 resnet.eval
 
-#d={}
+d={}
 
 preprocess=transforms.Compose([transforms.Resize(256),
                                transforms.CenterCrop(224),
