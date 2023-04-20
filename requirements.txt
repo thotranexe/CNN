@@ -1,5 +1,5 @@
 pillow
 torch
 numpy
-sklearn
+scikit-learn
 streamlit
