@@ -13,6 +13,7 @@ import numpy
 from sklearn.neighbors import NearestNeighbors
 import streamlit as st
 
+st.write("cnn assignment")
 class NumpyArrayEncoder(JSONEncoder):
     def default(self, obj):
         if isinstance(obj, numpy.ndarray):
