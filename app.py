@@ -49,9 +49,9 @@ def get_vector(image):
     h.remove()
     # Return the feature vector
     return my_embedding
-
-for image in result:
-  d[image]=get_vector(Image.open(image).convert('RGB')).numpy()
+if not d:
+    for image in result:
+        d[image]=get_vector(Image.open(image).convert('RGB')).numpy()
 
 st.write("cnn assignment")
 class NumpyArrayEncoder(JSONEncoder):
