@@ -2,5 +2,4 @@ pillow
 torch
 numpy
 sklearn
-json
 streamlit
