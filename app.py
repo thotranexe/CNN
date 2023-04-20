@@ -13,16 +13,6 @@ import numpy
 from sklearn.neighbors import NearestNeighbors
 import streamlit as st
 
-st.write("cnn assignment")
-class NumpyArrayEncoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, numpy.ndarray):
-            return obj.tolist()
-        return JSONEncoder.default(self, obj)
-
-with open('sample.json') as json_file:
-    data = json.load(json_file)
-
 resnet=models.resnet50(pretrained=True)
 layer = resnet._modules.get('avgpool')
 #grab all images in the lfw folder
@@ -60,8 +50,21 @@ def get_vector(image):
     # Return the feature vector
     return my_embedding
 
-#for image in result:
-  #d[image]=get_vector(Image.open(image).convert('RGB')).numpy()
+for image in result:
+  d[image]=get_vector(Image.open(image).convert('RGB')).numpy()
+
+st.write("cnn assignment")
+class NumpyArrayEncoder(JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, numpy.ndarray):
+            return obj.tolist()
+        return JSONEncoder.default(self, obj)
+
+with open("sample.json", "w") as outfile:
+    json.dump(d, outfile,cls=NumpyArrayEncoder)
+
+with open('sample.json') as json_file:
+    data = json.load(json_file)
 
 image=st.file_uploader(label="upload your own file",type="jpg")
 if image is None:
