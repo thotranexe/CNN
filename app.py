@@ -12,6 +12,10 @@ from json import JSONEncoder
 import numpy
 from sklearn.neighbors import NearestNeighbors
 import streamlit as st
+import dropbox
+import io
+
+dbx=dropbox.Dropbox("sl.Bc63AXYsCQRB4w0VqBACOKb1WvkPq8YNVhcvzbLYHa0d6BSaW2YEhejeYYz9M3jn1jSPG7DwziB9aqoAmnNevApdOPFkcknxy_dzlAG00PaKjiw3Qx8nnf3XXzMat0e8C3Fc7jg")
 
 resnet=models.resnet50(pretrained=True)
 layer = resnet._modules.get('avgpool')
@@ -49,22 +53,29 @@ def get_vector(image):
     h.remove()
     # Return the feature vector
     return my_embedding
-if not d:
-    for image in result:
-        d[image]=get_vector(Image.open(image).convert('RGB')).numpy()
+
+#if not d:
+#    for image in result:
+#        d[image]=get_vector(Image.open(image).convert('RGB')).numpy()
 
 st.write("cnn assignment")
-class NumpyArrayEncoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, numpy.ndarray):
-            return obj.tolist()
-        return JSONEncoder.default(self, obj)
 
-with open("sample.json", "w") as outfile:
-    json.dump(d, outfile,cls=NumpyArrayEncoder)
+#class NumpyArrayEncoder(JSONEncoder):
+#    def default(self, obj):
+#        if isinstance(obj, numpy.ndarray):
+#            return obj.tolist()
+#        return JSONEncoder.default(self, obj)
 
-with open('sample.json') as json_file:
-    data = json.load(json_file)
+#with open("sample.json", "w") as outfile:
+#    json.dump(d, outfile,cls=NumpyArrayEncoder)
+
+	
+
+
+_, res = dbx.files_download("/sample.json")
+
+with io.BytesIO(res.content) as stream:
+    data = json.load(stream)
 
 image=st.file_uploader(label="upload your own file",type="jpg")
 if image is None:
