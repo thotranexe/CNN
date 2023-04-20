@@ -1,6 +1,6 @@
 pillow
 torch
-torch-vison 
+torchvision
 numpy
 scikit-learn
 streamlit
