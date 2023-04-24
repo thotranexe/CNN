@@ -15,7 +15,7 @@ import streamlit as st
 import dropbox
 import io
 
-dbx=dropbox.Dropbox("sl.Bc63AXYsCQRB4w0VqBACOKb1WvkPq8YNVhcvzbLYHa0d6BSaW2YEhejeYYz9M3jn1jSPG7DwziB9aqoAmnNevApdOPFkcknxy_dzlAG00PaKjiw3Qx8nnf3XXzMat0e8C3Fc7jg")
+dbx=dropbox.Dropbox("sl.BdGZL5PHc3UJpUclN48L18TtjhntJy2NiUk89HK_mylKpAw9WJH3ScGVfPMol-qapZuUjNSgaPkMlB4-rrsK9_Nx2biMeujegAmlT1GQmgA4YJNsV0AEqr--91Zt7z8es3gNTFo")
 
 resnet=models.resnet50(pretrained=True)
 layer = resnet._modules.get('avgpool')
